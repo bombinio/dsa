@@ -32,6 +32,11 @@ class Solution(object):
     #     return output
 
     # second more efficient solution
+    # very cool solution: we know that letters are numbers in ASCII table, so we can create array with size of
+    # alphabet and for each word we create array of 26 zeros and when we iterate through each word in array, we then
+    # iterate through its letters and for each word we create array as key in hashmap, for example for word 'abc'
+    # we create array [1,1,1,0,0,0...] and in hashmap this array is key and his value is original word, if we have same
+    # key, we append original word to this key, then we just return values of hashmap
     def groupAnagrams(self, strs):
         res = defaultdict(list) # mapping charCount to List of Anagrams
 
@@ -40,7 +45,7 @@ class Solution(object):
             for c in s:
                 count[ord(c) - ord('a')] += 1
 
-            res[tuple(count)].append(s)
+            res[tuple(count)].append(s) # we use tuple to make array hashable(Arrays are not hashable!)
 
         print(res)
         return res.values()
