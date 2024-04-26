@@ -20,27 +20,25 @@
 class Solution(object):
     def threeSum(self, nums):
         nums.sort()
-        print(nums)
-        i = 0
-        k = len(nums) - 1
-        j = (i + k) // 2
         prevSet = set()
-        while True:
-            print(i, j, k)
-            if i == j or k == j:
-                return prevSet
-            if nums[i] + nums[j] + nums[k] == 0:
-                prevSet.add(tuple([nums[i], nums[j], nums[k]]))
-                i += 1
-            elif nums[i] + nums[j] + nums[k] > 0:
-                k -= 1
-                j = (i + k) // 2
-            elif nums[i] + nums[j] + nums[k] < 0:
-                i += 1
-                j = (i + k) // 2
+        for i in range(len(nums) - 2):
+            j = i + 1
+            k = len(nums) - 1
+            while j < k:
+                if nums[i] + nums[j] + nums[k] == 0:
+                    prevSet.add((nums[i], nums[j], nums[k]))
+                    k -= 1
+                elif nums[i] + nums[j] + nums[k] > 0:
+                    k -= 1
+                else:
+                    j += 1
+        output = []
+        for nset in prevSet:
+            output.append(list(nset))
+        return output
 
-        return prevSet
 
 sol = Solution()
 print(sol.threeSum([-1, 0, 1, 2, -1, -4]))
+print(sol.threeSum([-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6]))
 print(sol.threeSum([0, 0, 0]))
