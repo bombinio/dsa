@@ -16,40 +16,8 @@
 
 class Solution(object):
     def merge(self, nums1, m, nums2, n):
-        for k in range(n):
-            nums1[m+k] = 1000
 
-        print(nums1, 'here')
-
-        i = 0
-        j = 0
-        tmp = 0
-
-        while i < m and j < n:
-            if nums1[i] <= nums2[j]:
-                i += 1
-            else:
-                nums1[m+j] = nums1[i]
-                tmp += 1
-                nums1[i] = nums2[j]
-                i += 1
-                j += 1
-
-        if j < n:
-            for k in range(j-tmp, n):
-                if i < m + n:
-                    print(i, j)
-                    if nums1[i] <= nums2[j]:
-                        i += 1
-                    else:
-                        nums1[i + 1] = nums1[i]
-                        nums1[i] = nums2[j]
-                        i += 1
-                        j += 1
-
-
-        return nums1
 
 
 sol = Solution()
-print(sol.merge([4,0,0,0,0,0], 1, [1,2,3,5,6], 5))
+print(sol.merge([1,2,4,5,6,0], 5, [3], 1))

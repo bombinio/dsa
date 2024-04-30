@@ -10,6 +10,14 @@
 # Output: true
 
 # Algorithm 2 Pointers
+# Algorithm 2 Pointers
+# 1) Initialise 2 pointers, start and end
+# 2) Compare current letter of string 's' with string 't', if they are equal increment 'i' and increment 'j'
+# always increase 'j' regardless of the result of the comparison
+# if i == length of 's', s is consequence of t.
+# 3) For example 'abc' and 'abdec', here after loop, 'i' will be the length of 'abc' and function returns True as It
+# should. e.g 'abc' and 'acb'. s[i] will find first 'a' but it will find 'b' only in the end of loop, and after end of
+# of loop: 'i' == 2' and != 'length of s' it will return False
 
 class Solution(object):
     def isSubsequence(self, s, t):

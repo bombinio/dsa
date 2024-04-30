@@ -16,6 +16,9 @@
 # Output: ["o","l","l","e","h"]
 
 # Algorithm 2 Pointers
+# 1) Initialise 2 pointers, start and end
+# 2) save 'letter' in temporary variable, because we will overwrite it
+# 3) swap letters and move pointers forward(i) and back(j)
 
 class Solution(object):
     def reverseString(self, s):
