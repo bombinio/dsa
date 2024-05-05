@@ -15,29 +15,29 @@
 class Solution(object):
     # TODO
     def numSubarrayProductLessThanK(self, nums, k):
-        l = 0
-        r = 0
-        output = 0
-        tmpProduct = nums[l]
-        while l < len(nums) and nums[l] > k:
+
+        l = output = 0
+
+        while l < len(nums) and nums[l] >= k:
             l += 1
 
-        while l < len(nums) and r < len(nums) - 1:
+        if l == len(nums):
+            return 0
 
-            output += r - l + 1
+        product = 1
+        r = l
+        while l < len(nums) and r < len(nums):
+            product *= nums[r]
+            if product >= k:
+                while product >= k:
+                    product /= nums[l]
+                    l += 1
 
-            while tmpProduct > k and l < len(nums):
-                tmpProduct /= nums[l]
-                l += 1
-
+            output += (r - l + 1)
             r += 1
-
-            tmpProduct *= nums[r]
-            if tmpProduct < k:
-                output += r - l + 1
 
         return output
 
 
 sol = Solution()
-print(sol.numSubarrayProductLessThanK([10,5,2,6], 100))
+print(sol.numSubarrayProductLessThanK([100,2,3,4,100,5,6,7,100], 100))
