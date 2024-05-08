@@ -5,35 +5,28 @@
 
 # not working
 class Solution(object):
-    # TODO
+
+    def findMax(self, dict):
+        max = 0
+        for key in dict:
+           if dict[key] > max:
+              max = dict[key]
+
+        return max
     def characterReplacement(self, s, k):
-        output = 0
-        start = 0
-        maxRepeatsChar = 0
-        maxChar = ''
-        otherChar = 0
+        left = output = 0
         prevMap = {}
-        for l in range(len(s)):
-            if s[l] in prevMap:
-                prevMap[s[l]] += 1
-                maxRepeatsChar = max(prevMap[s[l]], maxRepeatsChar)
-                if prevMap[s[l]] == maxRepeatsChar:
-                    maxChar = s[l]
-                else:
-                    otherChar += 1
-                if maxRepeatsChar + k >= l - start + 1:
-                    maxRepeatsChar = l
-                    output = max(maxRepeatsChar, output)
-                else:
-                    output = max(maxRepeatsChar + k, output)
-                start = l
-                prevMap = {}
-                maxRepeatsChar = 0
-
-
+        for right in range(len(s)):
+            if s[right] in prevMap:
+                prevMap[s[right]] += 1
             else:
-                prevMap[s[l]] = 1
+                prevMap[s[right]] = 1
+                maxRepeat = self.findMax(prevMap)
+                while (right - left + 1) - maxRepeat > k:
+                    prevMap[s[left]] -= 1
+                    left += 1
 
+                output = max(right - left + 1, output)
 
         return output
 

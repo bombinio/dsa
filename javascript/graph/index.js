@@ -88,4 +88,4 @@ function knightMoves(curr, target){
     }
 }
 
-knightMoves([0,7], [7,0])
+knightMoves([0,0], [7,7])
