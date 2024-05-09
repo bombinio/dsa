@@ -15,13 +15,17 @@ const findMaxAverage = function(nums, k) {
     let right = k;
     let sum = 0;
     for (let i = 0; i < k; i++) {
+        console.log(nums[i])
         sum += nums[i];
     }
+    if (nums.length < k) {
+        return sum / nums.length
+    }
+
     let maxAverage = sum / k;
     while (right < nums.length) {
-        console.log(sum)
-        sum += right
-        sum -= left
+        sum += nums[right]
+        sum -= nums[left]
         let currentAvg = sum / k
         maxAverage = Math.max(currentAvg, maxAverage)
         left++;
