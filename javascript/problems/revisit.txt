@@ -1,0 +1,7 @@
+Easy:
+
+
+Medium:
+1) 14-product-of-array.js try to solve with Auxilary Space is O(1) / 17.05
+2) 19-3sum.js Find better solution / 11.05     Revisit in 10 days / 20.05
+
