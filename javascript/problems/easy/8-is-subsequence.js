@@ -9,6 +9,16 @@
 // Input: s = "abc", t = "ahbgdc"
 // Output: true
 
+/*
+------------------------------------------------------------------------------------------------------------------------
+ */
+// Algo 2 pointers
+// 1) Init variable, that will monitor, did we meet all letters from string 's' in from 't'
+// 2) If we met char from string 's' increment this variable
+// 3) After traversing through string 't' if length of string 's' === our variable, it means we found all characters
+// of string 's' in string 't'
+
+// Key points: ...
 
 const isSubsequence = function(s,t) {
     let lettersMeetings = 0;

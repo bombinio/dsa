@@ -14,6 +14,18 @@
 // Output: [1,2]
 // Explanation: The sum of 2 and 7 is 9. Therefore, index1 = 1, index2 = 2. We return [1, 2].
 
+/*
+------------------------------------------------------------------------------------------------------------------------
+ */
+
+// Algo:
+// 1) Save every number in hashmap
+// 2) At every iteration, find difference between current number and target
+// 3) If their difference in hashmap, return their index, otherwise add new key:value to hashmap, with index as value
+
+// Key points: 1) Saving previous number in hashmap, to reach them in next iterations
+
+
 const twoSum = function(numbers, target) {
     let prevMap = {}
     for (let i = 0; i < numbers.length; i++) {

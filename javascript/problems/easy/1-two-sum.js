@@ -12,6 +12,17 @@
 // Output: [0,1]
 // Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
 
+/*
+------------------------------------------------------------------------------------------------------------------------
+ */
+
+// Algo:
+// 1) Save every number in hashmap
+// 2) At every iteration, find difference between current number and target
+// 3) If their difference in hashmap, return their index, otherwise add new key:value to hashmap, with index as value
+
+// Key points: 1) Saving previous number in hashmap, to reach them in next iterations
+
 const twoSum = function(nums, target) {
     const prevMap = {}
     for (let i = 0; i < nums.length; i++) {

@@ -9,6 +9,17 @@
 // Input: s = "anagram", t = "nagaram"
 // Output: true
 
+/*
+------------------------------------------------------------------------------------------------------------------------
+ */
+
+// Algo
+// 1) Create hashmap for both strings
+// 2) Early return => if strings length is different, they cant be anagrams
+// 3) Compare in outer loop both hashmaps, if some key(letter) has different value(counts), string are not anagrams
+
+// Key points: 1) Hashmap.
+
 const isAnagram = function(s,t) {
     const sMap = {}
     const tMap = {}

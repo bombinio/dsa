@@ -9,6 +9,16 @@
 // Input: s = ["h","e","l","l","o"]
 // Output: ["o","l","l","e","h"]
 
+/*
+------------------------------------------------------------------------------------------------------------------------
+ */
+
+// Algo 2 pointers
+// 1) initialise left and right pointers (0, arr.length-1)
+// 2) while left < right, we swap letters
+
+// Key points:
+
 const reverseString = function(s) {
     let left = 0
     let right = s.length - 1

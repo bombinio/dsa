@@ -9,6 +9,18 @@
 // Explanation: After squaring, the array becomes [16,1,0,9,100].
 // After sorting, it becomes [0,1,9,16,100].
 
+/*
+------------------------------------------------------------------------------------------------------------------------
+ */
+
+// Algo 2 pointers
+// 1) Array is sorted, and we know that '-' * '-' = '+' so lowest number can be highest in result array
+// 2) Init. 2 pointers, and 3rd for output array, we will fill output array from the end
+// 3) Compare left and pointers values without their sign and add biggest to output array, increment left or decrement
+// right pointer, depends which one has bigger value, decrement pointer of output array, fill it from the end
+
+// Key points : ...
+
 const sortedSquares = function(nums) {
     let left = 0;
     let right = nums.length - 1;

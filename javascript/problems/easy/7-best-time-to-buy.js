@@ -13,6 +13,18 @@
 // Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
 // Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
 
+/*
+------------------------------------------------------------------------------------------------------------------------
+ */
+// Algo 2 pointers
+// 1) Init. 2 pointers => today and tomorrow
+// 2) If today profit is less than tomorrow, move to the next day, and increase previous tomorrow to current tomorrow
+// 3) Otherwise calculate current profit, and move 'tomorrow' pointer to search for bigger profit
+// 4) Repeat this process
+
+// Key points: ...
+
+
 const maxProfit = function(prices) {
     let left = 0;
     let right = 1;
