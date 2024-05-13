@@ -1,5 +1,5 @@
 Easy:
-
+1) 26-valid-parentheses / 20.05
 
 Medium:
 1) 14-product-of-array.js try to solve with Auxilary Space is O(1) / 17.05
