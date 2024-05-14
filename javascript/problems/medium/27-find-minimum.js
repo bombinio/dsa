@@ -24,40 +24,29 @@
 
 // TODO
 const findMin = function(nums) {
-    let start = 0
-    let left;
-    let right;
-    if (nums[start] < nums[start+1] && nums[start] < nums[nums.length-1]) {
-        return nums[start];
-    }
-    else {
-        start = nums.length - 1;
-        if (nums[start - 1] < nums[start]){
-            right = start - 1
-            left = 1
-        }
-        else {
-            return nums[start]
-        }
-    }
+    let left = 0;
+    let right = nums.length - 1;
+    let minValue = nums[0];
     while (left <= right) {
+        if (nums[left] < nums[right]){
+            minValue =  Math.min(minValue, nums[left])
+            break;
+        }
         let mid = Math.floor((left + right) / 2)
-        // console.log(mid, left, right)
-        if (nums[mid] > nums[mid + 1]){
-            // console.log('here one')
-            left = mid + 1;
-        }
-        else if (nums[mid] > nums[mid-1]) {
-            // console.log('here two')
-            right = mid - 1;
-        }
-        else {
-            return nums[mid]
+        minValue = Math.min(minValue, nums[mid])
+        if (nums[mid] > nums[right]) {
+            left = mid + 1
+        } else {
+            right = mid - 1
         }
     }
+    return minValue;
 }
+
+
 
 console.log(findMin([2,3,4,5,1]))
 console.log(findMin([4,5,6,7,0,1,2]))
 console.log(findMin([3,4,5,6,1,2]))
 console.log(findMin([5,1,2,3,4]))
+console.log(findMin([7,8,1,2,3,4,5,6]))
