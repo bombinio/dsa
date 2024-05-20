@@ -12,30 +12,29 @@
 // Output: [24,12,8,6]
 
 const productExceptSelf = function(nums) {
-    let prefix = [nums[0]];
-    let postfix = Array(nums.length).fill(0);
-    postfix[nums.length-1] = nums[nums.length-1]
-    let output = [];
-    for (let i = 1; i < nums.length; i++) {
-        prefix.push(nums[i] * prefix[i-1])
-    }
-    for (let i = nums.length-2; i >= 0; i--) {
-        postfix[i] = (nums[i] * postfix[i + 1])
-    }
-    for (let i = 0; i < nums.length; i++) {
+    const output = [];
+    for (let i = 0; i < nums.length-1; i++) {
         if (i === 0) {
-            output.push(postfix[i + 1]);
-            continue;
-        }
-        if (i === nums.length - 1) {
-            output.push(prefix[i - 1])
-            continue;
+            output[1] = nums[i]
+            output[0] = nums[i]
         }
         else {
-            output.push(prefix[i-1] * postfix[i + 1])
+            output[i+1] = output[i] * nums[i]
         }
     }
-    return output
+    console.log(output)
+    let postfix = 1;
+    for (let i = nums.length - 1; i > 0; i--) {
+        postfix *= nums[i]
+        if (i === nums.length - 1) {
+            output[i-1] *= postfix
+        }
+        else {
+            output[i-1] = postfix
+        }
+    }
+    return output;
 }
 
-console.log(productExceptSelf([1,2,3,4]))
+// console.log(productExceptSelf([1,2,3,4]))
+console.log(productExceptSelf([-1,1,0,-3,3]))

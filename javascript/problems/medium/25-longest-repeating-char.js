@@ -31,19 +31,23 @@
 const characterReplacement = function(s, k) {
     let left = 0;
     let right = 0;
-    let maxCount = 0;
-    let visited = {};
+    let maxChar = 0;
+    let prevMap = {};
     while (right < s.length) {
-        const char = s[right]
-        visited[char] = visited[char] ? visited[char] + 1 : 1;
-        maxCount = Math.max(visited[s[right]], maxCount)
-        while (right - left + 1 - maxCount > k) {
-            visited[s[left]]--
-            left++;
+        if (s[right] in prevMap) {
+            prevMap[s[right]]++
+        } else {
+            prevMap[s[right]] = 1
         }
-        right++;
+        maxChar = Math.max(prevMap[s[right]], maxChar)
+        while ( right - left + 1 - maxChar > k  ) {
+            prevMap[s[left]]--;
+            left++
+        }
+        right++
     }
-    return right - left
+    return right - left;
 }
 
 console.log(characterReplacement('ABAB', 2))
+console.log(characterReplacement('AABABBA', 1))
