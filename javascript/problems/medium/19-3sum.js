@@ -11,30 +11,41 @@
 // The distinct triplets are [-1,0,1] and [-1,-1,2].
 // Notice that the order of the output and the order of the triplets does not matter.
 
+// Algos
+// 1) Sort array, to use 2 pointers
+// 2) Make 'i' pointer fixed and use 'i+1' and 'arr.length-1' pointers to search 3 sum
+// 3) How to optimize it? firstly if i > 0 and previous number is the same as current, then we can skip current
+// iteration, even if we will get new 3sum, it won't be unique
+// secondly: after finding 3sum, we increment 'mid' or 'left' pointer but what if next 'mid' pointer is the same
+// as previous, so if dont want to make extra iterations, we can just check if 'mid' !== 'mid-1' as we did with
+// 'i' index.
+
+
 // This is very very very slow solution
-const threeSum = function(nums) {
-    let i = 0
-    let outputSet = new Set()
-    nums.sort((a, b) => a - b)
-    console.log(nums)
-    while (i < nums.length - 1) {
-        let j = i + 1;
-        let k = nums.length - 1;
-        while (j < k) {
-            if (nums[k] + nums[j] + nums[i] === 0) {
-                outputSet.add(JSON.stringify([nums[k], nums[j], nums[i]]))
-                k--;
-            } else if (nums[k] + nums[j] + nums[i] > 0) {
-                k--;
-            } else {
-                j++;
+const threeSum = function (nums) {
+    const prevMap = {}
+    let output = []
+    nums = nums.sort((a, b) => a - b)
+    for (let i = 0; i < nums.length; i++) {
+        if (i > 0 && nums[i-1] === nums[i]) continue;
+        let mid = i + 1;
+        let right = nums.length - 1;
+        while (mid < right) {
+            let theirSum = nums[i] + nums[mid] + nums[right];
+            if (theirSum > 0) {
+                right--;
+            }
+            else if (theirSum < 0) {
+                mid++;
+            }
+            else {
+                output.push([nums[i], nums[mid], nums[right]])
+                mid++;
+                while (nums[mid] === nums[mid-1] && mid < right) {
+                    mid++;
+                }
             }
         }
-        i++
-    }
-    let output = []
-    for (let key of outputSet) {
-        output.push(JSON.parse(key))
     }
     return output;
 }

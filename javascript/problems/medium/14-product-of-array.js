@@ -13,25 +13,16 @@
 
 const productExceptSelf = function(nums) {
     const output = [];
-    for (let i = 0; i < nums.length-1; i++) {
-        if (i === 0) {
-            output[1] = nums[i]
-            output[0] = nums[i]
-        }
-        else {
-            output[i+1] = output[i] * nums[i]
-        }
+    let prefix = 1;
+    for (let i = 0; i < nums.length; i++) {
+        output[i] = prefix;
+        prefix *= nums[i];
     }
     console.log(output)
     let postfix = 1;
-    for (let i = nums.length - 1; i > 0; i--) {
+    for (let i = nums.length - 1; i > -1; i--) {
+        output[i] *= postfix
         postfix *= nums[i]
-        if (i === nums.length - 1) {
-            output[i-1] *= postfix
-        }
-        else {
-            output[i-1] = postfix
-        }
     }
     return output;
 }

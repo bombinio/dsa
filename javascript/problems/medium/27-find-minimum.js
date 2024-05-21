@@ -17,30 +17,14 @@
 // Output: 1
 // Explanation: The original array was [1,2,3,4,5] rotated 3 times.
 
-// Algo
+// Algos
 // 1) Check first index of array, if it's less than 0+1 and arr.length - 1, it means it's lowest number
 // 2) Otherwise i = arr.len - 1, now check arr.len - 1 - 1, if it's bigger than i, then i is the lowest number
 // 3) Otherwise we search in range [1:arr.len-1-1] like in ordinary binary search
 
 // TODO
 const findMin = function(nums) {
-    let left = 0;
-    let right = nums.length - 1;
-    let minValue = nums[0];
-    while (left <= right) {
-        if (nums[left] < nums[right]){
-            minValue =  Math.min(minValue, nums[left])
-            break;
-        }
-        let mid = Math.floor((left + right) / 2)
-        minValue = Math.min(minValue, nums[mid])
-        if (nums[mid] > nums[right]) {
-            left = mid + 1
-        } else {
-            right = mid - 1
-        }
-    }
-    return minValue;
+
 }
 
 
