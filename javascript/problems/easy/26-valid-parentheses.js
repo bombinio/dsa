@@ -13,8 +13,13 @@
 // Input: s = "()"
 // Output: true
 
-// Algo
-// 1)
+// Algos
+// 1) Firstly we need to use data structure 'stack' and we need only using 'pop' 'push' 'getLastElement' functions from stack
+// 2) We only push open brackets to stack, if s[i] is closed brackets we check if last element in stack is the same type
+// of closed brackets, if yes then we pop it from stack, otherwise we return false and brackets are invalid
+// 3) If loop ended it means all brackets were valid and stack should be empty, that what we compare in the end
+
+// Key points: use data structure 'stack'
 
 const isValid = function(s) {
     const stack = [];

@@ -25,6 +25,8 @@
 // 7) if target is bigger then right pointer(biggest number in right half) we should search in left half
 // 8) and if target is bigger then mid, it means target in range [mid:right]
 
+// Key point: Look for boundaries in rotated sorted array
+
 const search = function (nums, target) {
     let left = 0;
     let right = nums.length - 1;

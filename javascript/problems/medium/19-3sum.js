@@ -20,6 +20,8 @@
 // as previous, so if dont want to make extra iterations, we can just check if 'mid' !== 'mid-1' as we did with
 // 'i' index.
 
+// Key points: optimize algorithm by searching only unique triplets, just skip duplicates.
+
 
 // This is very very very slow solution
 const threeSum = function (nums) {

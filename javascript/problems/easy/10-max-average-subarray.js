@@ -10,6 +10,9 @@
 // Output: 12.75000
 // Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75
 
+// Algos
+
+
 const findMaxAverage = function(nums, k) {
     let left = 0;
     let right = k;

@@ -25,6 +25,8 @@
 // we move left pointer, left = 1, mid = 1 right = 1 => we searched all numbers, time to left from cycle, in the next
 // iteration loop will break;
 
+// Key points: compare boundaries in rotate sorted array
+
 // TODO
 const findMin = function(nums) {
     let left = 0
