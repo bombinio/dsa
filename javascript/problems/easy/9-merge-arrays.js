@@ -18,7 +18,12 @@
  */
 
 // Algos
+// 1) Nums1 array is already the size of summary array, mostly its algo from sorting array by merging, but in 1 array and harder
+// 2) Last number of each array (m-1 and n-1) are their smallest so comparing them we can find biggest of them
+// if m-1 is bigger we add to end of nums1 m-1 and decrement it to m-2, otherwise we do the but with 'n'
+// 3) We end loop, only when k is <= i, it means we iterated through whole array.
 
+// Key points: Idea is to override values of array by pointer 'k' with value that we get from comparing 'i' and 'j' pointers
 
 const merge = function(nums1, m, nums2, n) {
     let i = m-1

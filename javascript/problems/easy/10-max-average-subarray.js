@@ -11,7 +11,10 @@
 // Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75
 
 // Algos
+// 1) Algos is sliding window, firstly we create sliding window in range 'k' and finding its sum and average number
+// 2) Then we just move our window -1 and +1 to search new maxAverage number and return it in the end
 
+// Key points: Declare sliding window and move it slowly
 
 const findMaxAverage = function(nums, k) {
     let left = 0;

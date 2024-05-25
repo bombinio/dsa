@@ -31,6 +31,11 @@
 // It does not matter what you leave beyond the returned k (hence they are underscores).
 
 // Algos
+// 1) Create pointer which represents only range of unique numbers
+// 2) Iterate through array and if i === 0(number is unique 100%) or curr number !== previous number then unique numbers
+// pointer increases, also array is sorted that's why it works, then just return unique numbers index
+
+// Key points: create unique number pointer and iterate through array, finding unique numbers
 
 const removeDuplicates = function(nums) {
     let uniqueIndex = 0;
