@@ -10,6 +10,15 @@
 // Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
 
 // super cool algorithm, by neetcode(https://www.youtube.com/watch?v=vzdNOK2oB2E&t=202s)
+// Algos
+// 1) we know that all input strings are lowercase words(a-z) we can represent them in numbers, char 'a' is 97 and
+// 'z' is 122
+// 2) knowing this, we can create matrix with size 26 with zeros, and increment by one index in matrix, when we meet char
+// that represents this index
+// 3) Then we can save this word in hashmap with matrix as key, if we have same matrix fo different words, it means they
+// are anagrams
+
+// Key points: Save in hashmap matrix with size 26, that represents word
 
 const groupAnagrams = function(strs) {
      let prevMap = {};

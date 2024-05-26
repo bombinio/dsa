@@ -1,4 +1,5 @@
 Easy:
+1) 31-minimum-value.js, next: 05.06;
 
 Medium:
 1) 14-product-of-array.js try to solve with Auxilary Space is O(1) / 17.05 ✅, next: 01.06
@@ -7,4 +8,5 @@ Medium:
 4) 27-find-minimum, next: 01.06
 5) 28-search-rotated-array, next 03.06
 6) 29-number-of-way-split, next: 04.06
+7) 24-subarray-product, next: 06.06
 

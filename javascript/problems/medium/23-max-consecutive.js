@@ -9,6 +9,17 @@
 // Explanation: [1,1,1,0,0,1,1,1,1,1,1]
 // Bolded numbers were flipped from 0 to 1. The longest subarray is underlined
 
+// Algos
+// 1) Just rename it to => you can have 'k' zeros in your subarray(sliding window) and it becomes simpler
+// 2) we declare two pointers at index 0(left and right) and amount of zeros, then we move our right pointer, if we meet
+// 0 we increment 'zeros' variable, if zeros > k => we launch while loop and move our tail of sliding window('left'
+// pointer, if array[left] is 0 we decrement 'zeros' variable because we just removed 0 from our sliding window
+// if did not meet 0, then we just do 'output = Math.max(output, right - left which is length of window)' to find
+// biggest subarray;
+
+// Key points: Just rename it to => you can have 'k' zeros in your subarray(sliding window) and it becomes simpler
+
+
 const longestOnes = function (nums, k) {
     let zeros = 0;
     let left = 0;
