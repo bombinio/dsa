@@ -9,6 +9,16 @@
 //     A Sudoku board (partially filled) could be valid but is not necessarily solvable.
 //     Only the filled cells need to be validated according to the mentioned rules.
 
+// Algos
+// 1) for each row and column create hashsets to track duplicates, it we met duplicates return false
+// 2) Create subBoxes hashmap for each 3x3 boxes
+// SubBoxes will have keys like [0,1] [0,2] [0,0] [2,2] etc... it represents each 3x3 box!
+// 3) SubBox accepts array as key, and hashset as value, it helps track every number in 3x3 box
+// 4) By dividing indexes 'i' and 'j' by 3 we can find to which box we should put current number
+// If current number already exists in this subbox we return false
+
+// Key point: create sets for each row, column. Create subBoxes hashmap, key is serial number of box
+// Divide 'i' and 'j' by 3 to find in which box to put current number
 
 const isValidSudoku = function(board) {
     for (let i = 0; i < board.length; i++) {
