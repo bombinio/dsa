@@ -14,6 +14,16 @@
 // Output: 49
 // Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
 
+// Algos: 2 pointers
+// 1) Declare 2 pointers, start and at the end
+// 2) We need to find area of rectangle, but firstly we need to find smallest height from both pointers
+// That what exactly we do in variable 'step' and calculate currArea
+// 3) Then we just compare currArea with maximum area that we could meet before
+// 4) Which pointer to move? We move the smallest one, because we already have snapshot of maximum area at this point
+// no point to continue, we should move forward and search other areas
+
+// Key point: 2 pointers, move pointer from the smallest height to calculate new, bigger areas
+
 const maxArea = function(height) {
     let left = 0;
     let right = height.length - 1;

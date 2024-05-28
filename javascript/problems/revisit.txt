@@ -9,4 +9,5 @@ Medium:
 5) 28-search-rotated-array, next 03.06
 6) 29-number-of-way-split, next: 04.06
 7) 24-subarray-product, next: 06.06
+8) 40-subarr-eq-k, next 08.06
 
