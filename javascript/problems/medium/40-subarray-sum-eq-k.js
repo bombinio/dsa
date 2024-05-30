@@ -29,7 +29,7 @@
 // ending by the current index if so, that means at one point the sum was 2 and now it is 5 and 5 - 2 = 3 = k,
 // we found the subarray again.
 
-// Key point: Almost the same as with prefix sum, but we use a hashmap to count subarrays, by checking if current
+// Key point: Almost the same as with prefix sum, but we save sum in hashmap and value is 'how many times this sum was met', by checking if current
 // prefixSum - k is in hashmap
 
 const subarraySum = function(nums, k) {

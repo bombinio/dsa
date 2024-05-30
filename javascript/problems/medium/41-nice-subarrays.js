@@ -10,7 +10,12 @@
 // Output: 2
 // Explanation: The only sub-arrays with 3 odd numbers are [1,1,2,1] and [1,2,1,1].
 
-// TODO
+// Algos
+// 1) Same algos like in 40-subarr-sum-eq-k.js but instead of sum we track amount of odd numbers in each subarray
+
+// Key point: Track amount of odd numbers in each iteration with hashmap, use oddNumber - k in hashMap to check,
+// do we have exactly 'k' elements in some of subarrays
+
 const numberOfSubarrays = function(nums, k) {
     const prevMap = {0: 1}
     let oddNumbers = 0;

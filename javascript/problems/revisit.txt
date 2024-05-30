@@ -10,4 +10,5 @@ Medium:
 6) 29-number-of-way-split, next: 04.06
 7) 24-subarray-product, next: 06.06
 8) 40-subarr-eq-k, next 08.06
+9) 41-nice-subarr, next 08.06
 
