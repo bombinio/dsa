@@ -13,7 +13,16 @@
 // - (1, 4), both numbers have a sum of digits equal to 7, and their sum is 43 + 7 = 50.
 // So the maximum sum that we can obtain is 54.
 
-// TODO
+// Algos
+// 1) Initialise hashmap and maxSum = -1
+// 2) iterate through array and use modulo operator to find remainder of number, for example 18 % 10 = 8, we add this to
+// digitsSum variable then we divide whole number by 10 and without fractional part => 18 / 10 = 1 we got part without
+// remainder and part with remainder => we sum it together at got digitsSum
+// 3) we check if digits sum is in hashmap, if yes we sum current number and other which saved in hashMap
+// 4) if current number is bigger than one that placed in hashmap, we replace this number with current
+
+// Key point: calculate digitsSum using % and / operators and use hashmap to save these number: key is digitsSum and value
+// number itself
 
 const maximumSum = function (nums) {
     const prevMap = {};
