@@ -11,21 +11,41 @@
 // Input: nums = [1,2,3,4]
 // Output: [24,12,8,6]
 
+// Algos
+// 1) To solve this problem we firstly need to calculate prefix product of array
+// 2) First element in prefix will be 1, because we will need product except itself
+// 3) then we iterate through nums array and if i === 1 we only push nums[0] to output array, because our current goal
+// is to push previous prefix to current index, for example [1,2,3,4] => [1,1,2,6] we pushed 2 when i === 2, because
+// we want to push only prefix for each number, so in future we will do postfix and multiply this prefix on postfix
+// and will be something like 2 * 4 => we will get right result
+// 4) after calculating prefix, we need calculate postfix and we need variable to save current for next iterations
+// 5) firstly we multiply output[nums.length-1] by 1 so we dont change it, because product of last number except self is
+// prefix product
+// 6) Then we update our postfix and we can complete what we wanted before, we already have array of prefixes for each
+// number, now we just 'harvest' it so for each number in output array we multiply it by postfix and get the result
+
+// Key point: Calculate prefix for each number [1,2,3,4] => [1,1,2,6] and then multiply it by postfix
+
 const productExceptSelf = function(nums) {
-    const output = [];
-    let prefix = 1;
-    for (let i = 0; i < nums.length; i++) {
-        output[i] = prefix;
-        prefix *= nums[i];
+    const output = [1];
+
+    for (let i = 1; i < nums.length; i++) {
+        if (i === 1) {
+            output.push(nums[0])
+        } else {
+            output.push(nums[i-1] * output[output.length - 1])
+        }
     }
-    console.log(output)
+
     let postfix = 1;
-    for (let i = nums.length - 1; i > -1; i--) {
-        output[i] *= postfix
+    for (let i = nums.length-1; i >= 0; i--) {
+        output[i] *= postfix;
         postfix *= nums[i]
     }
-    return output;
+
+    return output
 }
 
-// console.log(productExceptSelf([1,2,3,4]))
+console.log(productExceptSelf([1,2,3,4]))
 console.log(productExceptSelf([-1,1,0,-3,3]))
+console.log(productExceptSelf([4,3,2,1,2]))

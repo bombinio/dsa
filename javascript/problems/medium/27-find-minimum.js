@@ -19,7 +19,7 @@
 
 // Algos
 // 1) If our mid number is less then right number, it means we are in sequence and we should move in left direction
-// 2) We move our right pointer to the middle-1 like in ordinary binary search, and not to lost current mid
+// 2) We move our right pointer to the middle-1 like in ordinary binary search, and not to lose current mid
 // we compare it with 'currMin' and if first mid number was actually the lowest, we already saved it
 // 3) Then we just repeat this 'algo' until left <= right, e.g [5,1], left is 0, mid is 0, right is 1, arr[mid] < arr[right]
 // we move left pointer, left = 1, mid = 1 right = 1 => we searched all numbers, time to left from cycle, in the next
@@ -27,18 +27,16 @@
 
 // Key points: compare boundaries in rotate sorted array
 
-// TODO
 const findMin = function(nums) {
-    let left = 0
+    let left = 0;
     let right = nums.length - 1;
     let currMin = nums[0];
     while (left <= right) {
         let mid = Math.floor((left + right) / 2);
         currMin = Math.min(currMin, nums[mid])
-        if (nums[mid] < nums[right]) { // it means we have sequence in range [mid:right] and we must go only to the left
+        if (nums[mid] < nums[right]) { // array is in ascending order in range [mid:right]
             right = mid - 1;
-        }
-        else {
+        } else {
             left = mid + 1;
         }
     }

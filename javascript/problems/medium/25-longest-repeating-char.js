@@ -21,7 +21,7 @@
 // 4) If our windowSize - maxCount char > k => it means we can't replace more characters, so we need to shrink window
 // 5) we remove very first character, by doing visited[s[left]]-- and incrementing left pointer and right too
 // 6) Now we got our maxWindow size and it wont shrink anymore, only grow if it will be possible
-// 7) for Example 'AACABBAAAAA', k = 1, first window is 'AACA' then we just more left and right pointer and kinda have fixated
+// 7) for Example 'AACABBAAAAA', k = 1, first window is 'AACA' then we just move left and right pointers and kinda have fixated
 // window, until we have this window 'BAAA' from this point our window will only grow, in the end, right pointer will be
 // 10 and left pointer will be 5, size of window is 10-5 + 1 = 6, windowSize(6) - maxCount(5) is not bigger then k(1),
 // so window is valid, after right++, right === string.length, so loop ends, we return window length
@@ -29,25 +29,24 @@
 // Key points: 1) Find first minimum max window size, and then just move both pointers to find bigger window
 
 const characterReplacement = function(s, k) {
+    // s = 'ABCDDDDD'
+    const prevMap = {};
     let left = 0;
     let right = 0;
-    let maxChar = 0;
-    let prevMap = {};
+    let currMax = 0;
     while (right < s.length) {
-        if (s[right] in prevMap) {
-            prevMap[s[right]]++
-        } else {
-            prevMap[s[right]] = 1
-        }
-        maxChar = Math.max(prevMap[s[right]], maxChar)
-        while ( right - left + 1 - maxChar > k  ) {
+        prevMap[s[right]] = (s[right] in prevMap) ? prevMap[s[right]] + 1 : 1; // {C:1, D:5}
+        currMax = Math.max(currMax, prevMap[s[right]]) // 5
+        right++; // 8
+        if (right - left - currMax > k) { // 8 - 2 - 5 > 1
             prevMap[s[left]]--;
-            left++
+            left++; // 2
         }
-        right++
-    }
-    return right - left;
-}
 
+    }
+    return right - left; // 8 - 2 = 6
+}
+console.log(characterReplacement('AACABB', 1))
+console.log(characterReplacement('ABCDDDDD', 1))
 console.log(characterReplacement('ABAB', 2))
 console.log(characterReplacement('AABABBA', 1))
