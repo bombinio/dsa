@@ -36,13 +36,14 @@ const waysToSplitArray = function(nums) {
     const prefix = [nums[0]]
     let splits = 0;
     for (let i = 1; i < nums.length; i++) {
-        prefix.push(nums[i] + prefix[prefix.length-1]);
+        prefix.push(nums[i] + prefix[prefix.length-1])
     }
+    console.log(prefix)
     for (let i = 0; i < prefix.length-1; i++) {
-        let leftSection = prefix[i]
-        let rightSection = prefix[prefix.length-1]
-        let diff = rightSection - leftSection;
-        if (diff <= leftSection) splits++;
+        const difference = prefix[prefix.length-1] - prefix[i]
+        if (difference <= prefix[i]) {
+            splits++
+        }
     }
     return splits;
 }

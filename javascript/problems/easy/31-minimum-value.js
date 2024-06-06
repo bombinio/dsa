@@ -19,21 +19,23 @@
 //   (0 +4 ) = 4  | (1 +4 ) = 5    |   4
 //   (4 +2 ) = 6  | (5 +2 ) = 7    |   2
 
+// Algos
+// 1) Use prefix sum to find lowest sum in array
+// 2) If lowest is less than 0, we return the exact opposite of this number + 1, otherwise of lowest sum is 0 or 1 or
+// any other positive number, we just return 1, because array has only positive sums
+
+// Key point: Use prefix sum to find minimum sum in array
+
 const minStartValue = function (nums) {
-    const prefix = [];
-    let minSum = 1;
-    for (let i = 0; i < nums.length; i++) {
-        if (i === 0) {
-            prefix.push(minSum + nums[0])
-        } else {
-            prefix.push(nums[i] + prefix[prefix.length-1])
-        }
-        minSum = Math.min(minSum, prefix[prefix.length-1])
+    const prefix = [nums[0]]
+    let minValue = prefix[0]
+    for (let i = 1; i < nums.length; i++) {
+        prefix.push(nums[i] + prefix[prefix.length-1])
+        minValue = Math.min(minValue, prefix[prefix.length-1])
     }
-    if (minSum < 1) {
-        return Math.abs(minSum) + 2;
-    }
-    return minSum;
+    if (minValue < 0) {
+        return Math.abs(minValue) + 1
+    } else return 1
 }
 
 console.log(minStartValue([-3, 2, -3, 4, 2]))

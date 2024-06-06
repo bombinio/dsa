@@ -23,20 +23,25 @@
 const numSubarrayProductLessThanK = function(nums, k) {
     let left = 0;
     let right = 0;
+    let subarrays = 0;
     let currProduct = 1;
-    let subArrays = 0;
     while (right < nums.length) {
-        currProduct *= nums[right]
+        currProduct *= nums[right] // 60
         while (currProduct >= k) {
-            currProduct /= nums[left]
-            left++;
+            currProduct = Math.floor(currProduct / nums[left]) // 10
+            left++; // 1
         }
-        if (left <= right) {
-            subArrays += (right - left) + 1;
+        if (left > right) {
+            right = left;
+            currProduct = 1;
+            continue;
         }
-        right++;
+        subarrays += (right - left) + 1 // 5 + (3 - 1 + 1) = 8
+        right++; // 4
     }
-    return subArrays
+    return subarrays
 }
 
 console.log(numSubarrayProductLessThanK([10,5,2,6], 100))
+console.log(numSubarrayProductLessThanK([1,2,3], 0))
+console.log(numSubarrayProductLessThanK([1,2,3,4,5], 1))
