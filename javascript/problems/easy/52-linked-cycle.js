@@ -5,22 +5,22 @@
 // Return true if there is a cycle in the linked list. Otherwise, return false.
 
 // Algos
-// 1) Mark node as visited, if we react node that is visited = true we are in cycle
+// 1) Initialise slow and fast pointers
+// 2) If slow pointer's value === fast pointer's value, then we have cycle in linked list
+// 3) If fast pointer finished traversing successfully => we dont have cycle
 
-// Key point: Mark node as visited, if we react node that is visited = true we are in cycle
+// Key point: Use fast and slow pointers technique!
 
 
 const hasCycle = function(head) {
-    if (head === null) {
-        return false
-    }
-    head.visited = true
-    while(head.next) {
-        head = head.next
-        if(head.visited) {
+    let slow = head;
+    let fast = head;
+    while (fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+        if (fast === slow) {
             return true
         }
-        head.visited = true
     }
-    return false;
+    return false
 };
