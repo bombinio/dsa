@@ -33,19 +33,18 @@
 // prefixSum - k is in hashmap
 
 const subarraySum = function(nums, k) {
-    const prevMap = {0: 1}
-    let output = 0;
+    const prevMap = {0: 1};
     let currSum = 0;
+    let output = 0;
     for (let i = 0; i < nums.length; i++) {
-        currSum += nums[i]
-        // console.log(currSum - k, currSum, k)
-        if ( (currSum - k) in prevMap ) {
-            output += prevMap[currSum - k]
+        currSum += nums[i];
+        let targetDiff = currSum - k;
+        if (targetDiff in prevMap) {
+            output += prevMap[targetDiff]
         }
-        prevMap[currSum] = currSum in prevMap ? prevMap[currSum] + 1 : 1;
+        prevMap[currSum] = (currSum in prevMap) ? prevMap[currSum] + 1 : 1;
     }
-    // console.log(prevMap)
-    return output;
+    return output
 }
 
 console.log(subarraySum([1,2, 1, 2, 1], 3))

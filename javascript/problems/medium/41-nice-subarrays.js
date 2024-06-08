@@ -16,22 +16,22 @@
 // Key point: Track amount of odd numbers in each iteration with hashmap, use oddNumber - k in hashMap to check,
 // do we have exactly 'k' elements in some of subarrays
 
-const numberOfSubarrays = function(nums, k) {
-    const prevMap = {0: 1}
-    let oddNumbers = 0;
+const numberOfSubarrays = function (nums, k) {
+    const prevMap = {0: 1};
+    let currOddNumbers = 0;
     let output = 0;
     for (let i = 0; i < nums.length; i++) {
         if (nums[i] % 2 !== 0) {
-            oddNumbers++
+            currOddNumbers++;
         }
-        if ( (oddNumbers - k) in prevMap) {
-            output += prevMap[oddNumbers - k]
+        let targetDiff = currOddNumbers - k;
+        if (targetDiff in prevMap) {
+            output += prevMap[targetDiff]
         }
-        prevMap[oddNumbers] = (oddNumbers in prevMap) ? prevMap[oddNumbers] + 1 : 1
+        prevMap[currOddNumbers] = (currOddNumbers in prevMap) ? prevMap[currOddNumbers] + 1 : 1;
     }
-    console.log(prevMap)
     return output
 }
 
-console.log(numberOfSubarrays([1,1,2,1,1], 3))
-console.log(numberOfSubarrays([2,2,2,1,2,2,1,2,2,2], 2))
+console.log(numberOfSubarrays([1, 1, 2, 1, 1], 3))
+console.log(numberOfSubarrays([2, 2, 2, 1, 2, 2, 1, 2, 2, 2], 2))

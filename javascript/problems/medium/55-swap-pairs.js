@@ -10,14 +10,12 @@
 // TODO
 
 const swapPairs = function(head) {
-    let prev = null;
     let curr = head;
+    let prev = null;
     while(curr && curr.next) {
         let nextNode = curr.next;
         nextNode.next = curr;
-        curr.next = curr.next.next;
-        curr.next = curr;
-        curr = nextNode;
+        curr = prev;
     }
     return head;
 }
