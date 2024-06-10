@@ -26,19 +26,19 @@ const equalPairs = function (grid) {
     const columns = {};
     let output = 0;
     for (let i = 0; i < grid.length; i++) {
-        rows[grid[i]] = (grid[i] in rows) ? rows[grid[i]] + 1 : 1
-        const column = []
+        rows[grid[i]] = (grid[i] in rows) ? rows[grid[i]] + 1 : 1;
+        const column = [];
         for (let j = 0; j < grid.length; j++) {
             column.push(grid[j][i])
         }
-        columns[column] = (column in columns) ? columns[column] + 1 : 1
+        columns[column] = (column in columns) ? columns[column] + 1 : 1;
     }
     for (const row in rows) {
         if (row in columns) {
             output += (rows[row] * columns[row])
         }
-
     }
+
     return output;
 }
 

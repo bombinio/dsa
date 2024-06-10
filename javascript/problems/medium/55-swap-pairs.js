@@ -9,13 +9,25 @@
 
 // TODO
 
-const swapPairs = function(head) {
-    let curr = head;
-    let prev = null;
-    while(curr && curr.next) {
-        let nextNode = curr.next;
-        nextNode.next = curr;
-        curr = prev;
+class Node {
+    constructor(val) {
+        this.val = val;
+        this.next = null;
     }
-    return head;
 }
+
+const one = new Node(1);
+const two = new Node(2);
+const three = new Node(3);
+const four = new Node(4);
+
+one.next = two;
+two.next = three;
+three.next = four;
+
+
+const swapPairs = function(head) {
+
+}
+
+console.log(JSON.stringify(swapPairs(one)));

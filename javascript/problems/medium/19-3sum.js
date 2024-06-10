@@ -23,31 +23,37 @@
 // Key points: optimize algorithm by searching only unique triplets, just skip duplicates.
 
 
-// This is very very very slow solution
+// With checking duplicates, we made algorithm faster in 5x times
 const threeSum = function (nums) {
-    const prevMap = {}
-    let output = []
-    nums = nums.sort((a, b) => a - b)
+    const output = [];
+    const uniqueTriplets = new Set();
+    nums = nums.sort((a, b) => a- b);
     for (let i = 0; i < nums.length; i++) {
-        if (i > 0 && nums[i-1] === nums[i]) continue;
-        let mid = i + 1;
-        let right = nums.length - 1;
-        while (mid < right) {
-            let theirSum = nums[i] + nums[mid] + nums[right];
-            if (theirSum > 0) {
-                right--;
-            }
-            else if (theirSum < 0) {
-                mid++;
-            }
-            else {
-                output.push([nums[i], nums[mid], nums[right]])
-                mid++;
-                while (nums[mid] === nums[mid-1] && mid < right) {
-                    mid++;
+        let j = i+1;
+        let k = nums.length-1;
+        while(j < k) {
+            const threeSum = nums[i] + nums[j] + nums[k];
+            if (threeSum === 0) {
+                uniqueTriplets.add(JSON.stringify([nums[i], nums[j], nums[k]]));
+                k--;
+                while(nums[k] === nums[k+1]) {
+                    k--;
+                }
+            } else if (threeSum > 0) {
+                k--;
+                while(nums[k] === nums[k+1]) {
+                    k--;
+                }
+            } else {
+                j++;
+                while(nums[j] === nums[j-1]) {
+                    j++;
                 }
             }
         }
+    }
+    for (let value of uniqueTriplets) {
+        output.push(JSON.parse(value));
     }
     return output;
 }
