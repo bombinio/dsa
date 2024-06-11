@@ -12,5 +12,5 @@ Medium:
 8) 40-subarr-eq-k, next 08.06 ✅
 9) 41-nice-subarr, next 08.06 ✅
 10) 48th, next 10.06 ✅
-11) 45th, next 11.06
+11) 45th, next 11.06 ✅
 12) 55th, next 12.06,

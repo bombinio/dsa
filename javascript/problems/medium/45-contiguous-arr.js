@@ -31,16 +31,19 @@
 const findMaxLength = function (nums) {
     const prevMap = {0: {len: 0}};
     let currSum = 0;
-    let maxLength = 0;
+    let maxLen = 0;
     for (let i = 0; i < nums.length; i++) {
-        currSum = nums[i] === 0 ? currSum - 1 : currSum + 1;
-        if (currSum in prevMap && ( (i + 1 - prevMap[currSum].len) > maxLength)) {
-            maxLength = (i + 1 - prevMap[currSum].len)
-        } else if (!(currSum in prevMap)) {
+        currSum = (nums[i] === 0) ? currSum - 1 : currSum + 1;
+
+        if (currSum in prevMap) {
+            let currLen = i + 1;
+            let rangeOfContiguousArr = currLen - prevMap[currSum].len;
+            maxLen = Math.max(maxLen, rangeOfContiguousArr);
+        } else {
             prevMap[currSum] = {len: i + 1}
         }
     }
-    return maxLength
+    return maxLen;
 }
 
 // console.log(findMaxLength([0, 1]))
@@ -50,5 +53,5 @@ const findMaxLength = function (nums) {
 // console.log(findMaxLength([1,1,0,0,1,1,0,1,1]))
 console.log(findMaxLength([0, 0, 1, 0, 0, 0, 1, 1])) // should return 6
 // console.log(findMaxLength([1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1]))
-// console.log(findMaxLength([1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0]))
+// console.log(findMaxLength([1,0,1,0,1,1,0,0,1,0,0,0,1,0,0,0,1,1,0,1,1,0,1,0,0,1,0,0,1,1,0,0,1,1,1,0,0,1,1,0,0,0,1,1,0,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,0,0,0,1,0,1,1,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,0,1,1,0,0,1,0,0,0,0,1,0,1,0,0,0,0]))
 
