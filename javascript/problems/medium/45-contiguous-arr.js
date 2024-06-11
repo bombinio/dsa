@@ -25,6 +25,13 @@
 // is -2 in prevMap => yes! prevMap[-2] = {len: 2} so we just subtract current length of subarray => (i + 1 - 2)
 // 8 - 2  = 6, we check if its more than current maxLength, yes it's more so we assign 6 to maxLength
 
+// Mention for future. We save only currSum in prevMap that we did not meet before, because we want to find largest
+// contiguous array, for example we have [0,0...] and currSum is -2, then we have millions 0s and 1s and at some point
+// through few millions of 0s and 1s we got again currSum is -2, sum of -2 has length of 2, now to find largest cont. array
+// we just subtract: millions - 2 => answer. It means from range [2 to millions] we have array with same amount of 0s
+// and 1s. For example array with length 1 000 001 has sum -2, array with length 2 has sum -2 and array with length
+// 1 000 003 has sum -2,If we save  1000001 in prevMap in the end our biggest contiguous array is 1000003 - 1000001
+// but that's not true that's why we save only first currentSum in prevMap
 
 // Key point: Pattern with hashmap and prefix sum, increment sum if '1' and decrement if '0'
 
