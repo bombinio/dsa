@@ -43,10 +43,10 @@ const swapPairs = function(head) {
     if (!head || !head.next) {
         return head;
     }
-    let dummy = {next: null}
-    let prev = dummy;
+    let dummy = {next: null, val: null};
     let curr = head;
-    while (curr && curr.next) {
+    let prev = dummy;
+    while(curr && curr.next) {
         prev.next = curr.next;
         curr.next = prev.next.next;
         prev.next.next = curr;
@@ -54,7 +54,6 @@ const swapPairs = function(head) {
         prev = curr;
         curr = curr.next;
     }
-    console.log(prev)
     return dummy.next;
 }
 
