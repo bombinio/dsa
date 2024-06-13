@@ -29,7 +29,13 @@ one.next = two;
 two.next = three;
 three.next = four;
 
-// TODO
+// Algos
+// 1) Using fast and slow pointer technique we are gonna to find middle of linked list
+// 2) After we found middle(slow pointer) we can reverse linked list from [middle:end]
+// 3) We reversed linked list now we can just find all twin sums ( i + n-1-i) for example head is 'i' and
+// middle node is 'i-1-i'
+
+// Key points: use slow-fast pointers and reverse linked list from middle
 
 const pairSum = function(head) {
     let slow = head;
@@ -40,14 +46,20 @@ const pairSum = function(head) {
     }
     let prev = null;
     let curr = slow;
-    while(curr && curr.next) {
+    while(curr) {
         let nextNode = curr.next;
         curr.next = prev;
         prev = curr;
         curr = nextNode;
     }
-
-    return prev;
+    let maxSum = 0;
+    while (prev) {
+        let currSum = head.val + prev.val;
+        maxSum = Math.max(currSum, maxSum);
+        prev = prev.next;
+        head = head.next;
+    }
+    return maxSum;
 }
 
 console.log(pairSum(one))
