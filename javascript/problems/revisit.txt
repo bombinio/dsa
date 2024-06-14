@@ -1,5 +1,6 @@
 Easy:
 1) 31-minimum-value.js, next: 05.06; ✅
+2) 58th, next: 15.06;
 
 Medium:
 1) 14-product-of-array.js try to solve with Auxilary Space is O(1) / 17.05 ✅, next: 01.06 ✅
