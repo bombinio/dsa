@@ -9,30 +9,32 @@ class Node {
     }
 }
 
-const one = new Node(3);
-const two = new Node(5);
-// const three = new Node(3);
+const one = new Node(1);
+const two = new Node(2);
+const three = new Node(3);
 // const four = new Node(4);
 // const five = new Node(5);
 
 one.next = two;
-// two.next = three;
+two.next = three;
 // three.next = four;
 // four.next = five;
 
 // TODO
 
-const reverseBetween = function(head, left, right) {
+const reverseBetween = function (head, left, right) {
     let leftNode = head;
+    let rightNode = head;
+
     for (let i = 1; i < left; i++) {
         leftNode = leftNode.next;
     }
-    let rightBoundary = right - left;
-    let rightNode = leftNode;
-    for (let i = 0; i < rightBoundary; i++) {
+
+    for (let i = 1; i < right; i++) {
         rightNode = rightNode.next;
     }
     let rightBoundaryNode = rightNode.next;
+
     let curr = leftNode;
     let prev = null;
     while (curr !== rightBoundaryNode) {
@@ -42,26 +44,26 @@ const reverseBetween = function(head, left, right) {
         prev = curr;
         curr = nextNode;
     }
-    // fix this, we should use something other than head;
     let beforeLeftNode = head;
-    for (let i = 1; i < left - 1; i++) {
-        beforeLeftNode = beforeLeftNode.next;
+    if (left > 1) {
+        for (let i = 1; i < left-1; i++) {
+            beforeLeftNode = beforeLeftNode.next;
+        }
+        beforeLeftNode.next = prev;
+    } else {
+        head = prev;
     }
-    beforeLeftNode.next = prev;
-    //
 
-    let finalCurr = beforeLeftNode;
+    let finalCurr = head;
     for (let i = 1; i < right; i++) {
         finalCurr = finalCurr.next;
     }
     finalCurr.next = rightBoundaryNode;
 
-    // console.log(beforeLeftNode)
-    // console.log('left: ', JSON.stringify(leftNode));
-    // console.log('right: ', JSON.stringify(rightNode));
-    return beforeLeftNode;
+    return head;
 }
 
 // console.log(JSON.stringify(reverseBetween(one, 2, 4)))
-console.log(JSON.stringify(reverseBetween(one, 1, 2)))
+// console.log(JSON.stringify(reverseBetween(one, 1, 2)))
+console.log(JSON.stringify(reverseBetween(one, 3, 3)))
 
