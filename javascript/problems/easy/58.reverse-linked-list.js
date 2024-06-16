@@ -34,19 +34,17 @@ three.next = four;
 
 // Key points: create 'prev' pointer and 'nextNode' pointer and 'curr' pointer and move them every iteration
 
-var reverseList = function(head) {
+const reverseList = function(head) {
     let prev = null;
     let curr = head;
-    while(curr) {
+    while (curr) {
         let nextNode = curr.next;
         curr.next = prev;
-        if (nextNode === null) {
-            return curr;
-        }
+
         prev = curr;
         curr = nextNode;
     }
-    return curr;
+    return prev;
 };
 
 console.log(JSON.stringify(reverseList(one)))
