@@ -21,41 +21,54 @@
 // [7] with maximum absolute diff |7-7| = 0 <= 4.
 // Therefore, the size of the longest subarray is 2.
 
-// TODO
+
+// Algos: sliding window + monotonic queue
+// 1) Create increasing and decreasing monotonic queues and use while loop to fill these arrays in each iteration
+// and declare left variable as 0, because we will use sliding window
+// 2) if firstNum in decreasing queue - firstNum in increasing queue is bigger than limit, we check: 'Why is our
+// window no longer meeting the limit?' by comparing nums[left] === firstNum of increasing queue or decreasing
+// and .pop() this number from queue we can find number after which limit broke
+// 3) If our window is OK, then we just find max between maxLen and length of window(i-left+1)
+
+// Key point: create two monotonic increasing and decreasing queues and declare 'left' variable to find size of window
+// if firstNum in decreasing queue - firstNum in increasing queue is bigger than limit, we check: 'Why is our
+// window no longer meeting the limit?' by comparing nums[left] === firstNum of increasing queue or decreasing
+// and .pop() this number from queue we can find number after which limit broke
 
 const longestSubarray = function (nums, limit) {
-    let queueInc = [];
-    let queueDecr = [];
-    let maxOutput = 0;
-    let right = 0;
+    const queueIncreasing = [];
+    const queueDecreasing = [];
+    let maxLen = 0;
     let left = 0;
-    while (right < nums.length) {
-        while (nums[right] > nums[queueInc[queueInc.length - 1]]) {
-            queueInc.pop();
+    for (let i = 0; i < nums.length; i++) {
+        while (nums[i] > nums[queueDecreasing[queueDecreasing.length-1]]) {
+            queueDecreasing.pop();
         }
-        queueInc.push(right)
+        queueDecreasing.push(i);
 
-        while (nums[right] < nums[queueDecr[queueDecr.length - 1]]) {
-            queueDecr.pop();
+        while (nums[i] < nums[queueIncreasing[queueIncreasing.length-1]]) {
+            queueIncreasing.pop();
         }
-        queueDecr.push(right);
+        queueIncreasing.push(i);
 
-        while (nums[queueInc[0]] - nums[queueDecr[0]] > limit) {
-            if (nums[queueInc[0]] === nums[left]) {
-                queueInc.shift();
-            } else if (nums[queueDecr[0]] === nums[left]) {
-                queueDecr.shift();
+        let diff = nums[queueDecreasing[0]] - nums[queueIncreasing[0]];
+        while (Math.abs(diff) > limit) {
+            if (left === queueDecreasing[0]) {
+                queueDecreasing.shift()
+            } else if (left === queueIncreasing[0]) {
+                queueIncreasing.shift()
             }
             left++;
+            diff = nums[queueDecreasing[0]] - nums[queueIncreasing[0]]
         }
-
-        maxOutput = Math.max(maxOutput, right - left + 1);
-        right++;
+        maxLen = Math.max(maxLen, i - left + 1);
     }
-    return maxOutput;
+    console.log(queueIncreasing)
+    console.log(queueDecreasing)
+    return maxLen;
 }
 
-// console.log(longestSubarray([10,1,2,4,7,2], 5));
+console.log(longestSubarray([10,1,2,4,7,2], 5));
 // console.log(longestSubarray([4,2,2,2,4,4,2,2], 0));
 // console.log(longestSubarray([8], 10));
-console.log(longestSubarray([1, 5, 6, 7, 8, 10, 6, 5, 6], 4));
+// console.log(longestSubarray([1, 5, 6, 7, 8, 10, 6, 5, 6], 4));
