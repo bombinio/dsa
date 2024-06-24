@@ -6,24 +6,34 @@
 //
 // Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.
 
-// TODO
+// Algos: monotonic stack
+// 1) Use monotonic decreasing stack to find next greater number and save it in hashmap
+// 2) In second loop check if current number in hashmap, if yes then in output array, with current index, put
+// value of hashmap with key as current number
 
-const nextGreaterElement = function(nums1, nums2) {
-    let stackIncreasing = [];
+// Key point: Use monotonic decreasing stack + hashmap to save current number and his next greater element
+
+
+const nextGreaterElement = function (nums1, nums2) {
+    let stackDecreasing = [];
+    let nextGreaterElement = {};
     let output = Array.from(nums1).fill(-1);
     for (let i = 0; i < nums2.length; i++) {
-        while(nums2[i] < nums2[stackIncreasing[stackIncreasing.length-1]]) {
-            stackIncreasing.pop();
+        while (nums2[i] > nums2[stackDecreasing[stackDecreasing.length - 1]]) {
+            let currNumIndex = stackDecreasing.pop();
+            let currNum = nums2[currNumIndex];
+            nextGreaterElement[currNum] = nums2[i]
         }
-        stackIncreasing.push(i);
+        stackDecreasing.push(i);
     }
     for (let i = 0; i < nums1.length; i++) {
-        if (nums1[i] < nums2[stackIncreasing[stackIncreasing.length-1]]) {
-            output[i] = stackIncreasing[stackIncreasing.length-1]
+        if (nums1[i] in nextGreaterElement) {
+            output[i] = nextGreaterElement[nums1[i]];
         }
     }
     return output;
-};
+}
 
 console.log(nextGreaterElement([4,1,2], [1,3,4,2]))
+console.log(nextGreaterElement([4, 1, 2], [1, 2, 3, 4]))
 console.log(nextGreaterElement([2,4], [1,2,3,4]))
