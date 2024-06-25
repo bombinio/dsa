@@ -39,19 +39,20 @@ three.next = four;
 // Key points: Create dummy node like '0' and prev node variable, use combo: prev.next = curr.next; curr.next=prev.next.next
 // prev.next.next = curr;
 
-const swapPairs = function(head) {
+const swapPairs = function (head) {
     if (!head || !head.next) {
         return head;
     }
-    let curr = head;
-    let dummy = {val: null, next: null};
+    const dummy = {val: null, next: null};
     let prev = dummy;
+    let curr = head;
     while (curr && curr.next) {
+        let nextNode = curr.next.next;
         prev.next = curr.next;
         curr.next = prev.next.next;
         prev.next.next = curr;
 
-        prev = curr;
+        prev = curr
         curr = curr.next;
     }
     return dummy.next;
