@@ -18,9 +18,9 @@ Medium:
 11) 45th, next: 11.06 ✅
 12) 55th, next: 12.06 ✅, next: 19.06 ✅, next: 25.06 ✅
 13) 59th, next: 16.06 ✅
-14) 66th, next: 23.06 ✅, next: 26.06
-14) 67th, next: 23.06 ✅, next: 26.06
+14) 66th, next: 23.06 ✅, next: 26.06 ✅, next: 03.07
+14) 67th, next: 23.06 ✅, next: 26.06 ✅, next: 03.07
 15) 69th, next: 27.06
 
 Hard:
-1) 56th, next 23.06 ✅, next 26.06
+1) 56th, next 23.06 ✅, next 26.06 ✅, next: 03.07

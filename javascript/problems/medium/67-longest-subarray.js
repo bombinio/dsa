@@ -27,8 +27,12 @@
 // and declare left variable as 0, because we will use sliding window
 // 2) if firstNum in decreasing queue - firstNum in increasing queue is bigger than limit, we check: 'Why is our
 // window no longer meeting the limit?' by comparing nums[left] === firstNum of increasing queue or decreasing
-// and .pop() this number from queue we can find number after which limit broke
+// and .shift() this number from queue we can find number after which limit broke
 // 3) If our window is OK, then we just find max between maxLen and length of window(i-left+1)
+
+// why exactly nums[left] ? For example array [1000, 100, 50, 20, 10, 3, 2, 1] limit is 5
+// when we meet element 3 => we have these Decr and Incr arrays => decr: [1000,100,50,20,10, 3] and incr: [3]
+// and left is 0, using left we can check what number breaks constraints and also using left we can check size of window
 
 // Key point: create two monotonic increasing and decreasing queues and declare 'left' variable to find size of window
 // if firstNum in decreasing queue - firstNum in increasing queue is bigger than limit, we check: 'Why is our
@@ -41,30 +45,31 @@ const longestSubarray = function (nums, limit) {
     let maxLen = 0;
     let left = 0;
     for (let i = 0; i < nums.length; i++) {
-        while (nums[i] > nums[queueDecreasing[queueDecreasing.length-1]]) {
+        while (nums[i] < nums[queueIncreasing[queueIncreasing.length-1]])  {
+            queueIncreasing.pop();
+        }
+        queueIncreasing.push(i);
+        while (nums[i] > nums[queueDecreasing[queueDecreasing.length-1]])  {
             queueDecreasing.pop();
         }
         queueDecreasing.push(i);
 
-        while (nums[i] < nums[queueIncreasing[queueIncreasing.length-1]]) {
-            queueIncreasing.pop();
-        }
-        queueIncreasing.push(i);
-
-        let diff = nums[queueDecreasing[0]] - nums[queueIncreasing[0]];
-        while (Math.abs(diff) > limit) {
-            if (left === queueDecreasing[0]) {
-                queueDecreasing.shift()
-            } else if (left === queueIncreasing[0]) {
-                queueIncreasing.shift()
+        let diffBetweenMaximumAndMinimum = nums[queueDecreasing[0]] - nums[queueIncreasing[0]];
+        while (Math.abs(diffBetweenMaximumAndMinimum) > limit) {
+            if (nums[queueDecreasing[0]] === nums[left]) {
+                queueDecreasing.shift();
+            } else if (nums[queueIncreasing[0]] === nums[left]) {
+                queueIncreasing.shift();
             }
+            diffBetweenMaximumAndMinimum = nums[queueDecreasing[0]] - nums[queueIncreasing[0]]
             left++;
-            diff = nums[queueDecreasing[0]] - nums[queueIncreasing[0]]
         }
+        // Check what is bigger: maxLen or size of window
         maxLen = Math.max(maxLen, i - left + 1);
+
     }
-    console.log(queueIncreasing)
-    console.log(queueDecreasing)
+    // console.log(queueIncreasing);
+    // console.log(queueDecreasing);
     return maxLen;
 }
 

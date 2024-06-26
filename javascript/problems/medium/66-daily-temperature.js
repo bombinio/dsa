@@ -18,16 +18,17 @@
 // Key point: use monotonic decreasing stack, which saves only indexes of warmest days
 
 const dailyTemperatures = function(temperatures) {
-    const stack = [];
+    const stackDecreasing = [];
     const output = Array.from(temperatures).fill(0);
     for (let i = 0; i < temperatures.length; i++) {
-        while (temperatures[i] > temperatures[stack[stack.length-1]]) {
-            let j = stack.pop();
-            output[j] = i - j;
+        while (temperatures[i] > temperatures[stackDecreasing[stackDecreasing.length-1]]) {
+            let indexOfLastTemperature = stackDecreasing.pop();
+            output[indexOfLastTemperature] = i - indexOfLastTemperature;
         }
-        stack.push(i);
+        stackDecreasing.push(i);
     }
-    return output;
+
+    return  output;
 };
 
 console.log(dailyTemperatures([34,35,40, 31, 32, 33, 50]))
