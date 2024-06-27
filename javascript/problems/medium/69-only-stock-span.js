@@ -45,10 +45,12 @@ const StockSpanner = function () {
 
 StockSpanner.prototype.next = function (price) {
     let counter = 1;
-    while (this.stack.length > 0 && price >= this.stack[this.stack.length - 1].price) {
-        counter += this.stack.pop().counter;
+    const stack = this.stack;
+    while (stack.length > 0 && price > stack[stack.length-1].price) {
+        let prevCounter = stack.pop();
+        counter += prevCounter.counter;
     }
-    this.stack.push({price: price, counter: counter});
+    stack.push({price: price, counter: counter});
     return counter;
 }
 
