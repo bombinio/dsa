@@ -3,7 +3,8 @@ Easy:
 1) 31st, next: 05.06 ✅
 2) 58th, next: 16.06 ✅
 3) 68th, next: 27.06 ✅
-4) 71st, next: 28.06
+4) 71st, next: 28.06 ✅
+5) 72st, next: 29.06
 
 Medium:
 1) 14th try to solve with Auxilary Space is O(1) / 17.05 ✅, next: 01.06 ✅

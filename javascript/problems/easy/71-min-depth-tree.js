@@ -21,9 +21,10 @@ const four = new TreeNode(4, null, five);
 const three = new TreeNode(3, null, four);
 
 // Algos
-// TODO
+// 1) return counter only if we at the leaf node
+// 2) If left or right counters are 0, we assign left counter to right or vice versa
 
-// Key point:  TODO
+// Key point: return counter only if we are at the leaf node
 
 const minDepth = function (root, counter = 0) {
     if (!root) return 0
@@ -37,8 +38,8 @@ const minDepth = function (root, counter = 0) {
     let leftCounter = minDepth(root.left, counter);
     let rightCounter = minDepth(root.right, counter);
 
-    leftCounter = leftCounter === 0 ? 50000 : leftCounter;
-    rightCounter = rightCounter === 0 ? 50000 : rightCounter;
+    leftCounter = leftCounter === 0 ? rightCounter : leftCounter;
+    rightCounter = rightCounter === 0 ? leftCounter : rightCounter;
     return Math.min(leftCounter, rightCounter);
 }
 
