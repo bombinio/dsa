@@ -26,15 +26,7 @@ const three = new TreeNode(3, nine, twenty);
 
 // TODO
 
-const hasPathSum = function(root, targetSum, tmpSum = 0, output = []) {
-    if (!root) return 0;
-    if (root) {
-        tmpSum += root.val
-    }
-    output.push(tmpSum)
-    hasPathSum(root.left, targetSum, tmpSum, output);
-    hasPathSum(root.right, targetSum, tmpSum, output);
-    return output.includes(targetSum);
+const hasPathSum = function (root, targetSum, tmpSum = 0) {
 }
 
 console.log(hasPathSum(three, 12))
