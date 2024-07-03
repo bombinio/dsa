@@ -29,34 +29,28 @@
 // Key point: use monotonic decreasing queue, which saves only indexes of biggest numbers, if index is less than
 // right - k + 1 => it means number is outside of window, so we have to .shift() it
 
-const maxSlidingWindow = function (nums, k) {
-    const queue = [];
-    const output = [];
-    for (let i = 0; i < k; i++) {
-        while (nums[i] > nums[queue[queue.length-1]]) {
-            queue.pop();
-        }
-        queue.push(i);
+class Solution {
+  List<int> maxSlidingWindow(List<int> nums, int k ) {
+    final output = <int>[];
+    final queue = [];
+    for (int i = 0; i < k; i++) {
+      while (nums[i] > nums[queue[queue.length-1]]) {
+        queue.removeLast();
+      }
+      queue.add(i);
     }
-    output.push(queue[0]);
-    let right = k;
+    output.add(nums[queue[0]]);
+    int right = k;
     while (right < nums.length) {
-        while (nums[right] > nums[queue[queue.length-1]]) {
-            queue.pop();
-        }
-        queue.push(right);
-        while (queue[0] < right - k + 1) {
-            queue.shift();
-        }
-        output.push(nums[queue[0]]);
-        right++;
+      while (nums[right] > nums[queue[queue.length-1]]) {
+        queue.removeLast();
+      }
+      queue.add(right);
+      while (queue[0] < right - k + 1) {
+        queue.removeAt(0);
+      }
+      output.add(queue[0]);
     }
-
     return output;
+  }
 }
-
-console.log(maxSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 3));
-// console.log(maxSlidingWindow([1,-1], 1));
-// console.log(maxSlidingWindow([1,3,1,2,0,5], 3));
-// console.log(maxSlidingWindow([-7,-8,7,5,7,1,6,0], 4));
-// console.log(maxSlidingWindow([9, 10, 9, -7, -4, -8, 2, -6], 5));
