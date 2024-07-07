@@ -14,3 +14,21 @@
 
 // Key point: use hashmap to fastly check if number is in array
 
+class Solution {
+  int countElements(List<int> arr) {
+    final prevMap = <int, int>{};
+    int output = 0;
+    for (int i = 0; i < arr.length; i++) {
+      prevMap[arr[i]] = (prevMap[arr[i]] ?? 0) + 1;
+    }
+
+    for (int key in prevMap.keys) {
+      int nextKey = key + 1;
+      if (prevMap.containsKey(nextKey)) {
+        output += prevMap[key]!;
+        nextKey = nextKey + 1;
+      }
+    }
+    return output;
+  }
+}

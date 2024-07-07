@@ -2,43 +2,4 @@
 
 import 'dart:convert';
 
-class ListNode {
-  final int? val;
-  ListNode? next;
 
-  ListNode([this.val = 0, this.next]);
-
-  @override
-  String toString() {
-    return '${this.val} -> ${this.next}';
-  }
-}
-
-class Solution {
-  ListNode? reverseList(ListNode? head) {
-    if (head == null) return head;
-    ListNode? prev;
-    ListNode? curr = head;
-    while (curr != null) {
-      ListNode? nextNode = curr.next;
-      curr.next = prev;
-      prev = curr;
-      curr = nextNode;
-    }
-    return prev;
-  }
-}
-
-void main() {
-  ListNode one = ListNode(1);
-  ListNode two = ListNode(2);
-  ListNode three = ListNode(3);
-  ListNode four = ListNode(4);
-  ListNode five = ListNode(5);
-  one.next = two;
-  two.next = three;
-  three.next = four;
-  four.next = five;
-  five.next = null;
-  print(Solution().reverseList(one));
-}
