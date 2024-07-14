@@ -26,12 +26,15 @@
 // 10 and left pointer will be 5, size of window is 10-5 + 1 = 6, windowSize(6) - maxCount(5) is not bigger then k(1),
 // so window is valid, after right++, right === string.length, so loop ends, we return window length
 
+// currentLongestLetter may be incorrect for each window, but if we found valid window
+// with this var value of 3 and then it decreased to 1, its OK, we already had valid window,
+// after this we care only if we will meet window with currentLongestLetter > 3
+// so this window will be even bigger
+
 // Key points: 1) Find first minimum max window size, and then just move both pointers to find bigger window
 
 import 'dart:math';
 
-
-//TODO
 class Solution {
   int characterReplacement(String s, int k) {
     int longest = 0;
@@ -41,7 +44,18 @@ class Solution {
     int right = 0;
     while (right < s.length) {
       prevMap[s[right]] = prevMap.containsKey(s[right]) ? prevMap[s[right]] + 1 : 1;
-      currentLongestLetter =
+      currentLongestLetter = max(currentLongestLetter, prevMap[s[right]]);
+      if ( (right - left + 1) - currentLongestLetter > k ) {
+        prevMap[s[left]]--;
+        left++;
+      }
+      longest = max(longest, right - left + 1);
+      right++;
     }
+    return longest;
   }
+}
+
+void main() {
+  print(Solution().characterReplacement("AABABBA", 1));
 }
