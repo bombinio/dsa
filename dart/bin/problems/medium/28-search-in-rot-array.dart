@@ -26,9 +26,13 @@
 // 8) and if target is bigger then mid, it means target in range [mid:right]
 
 // Key point: Look for boundaries in rotated sorted array
-//TODO
+
 class Solution {
   int search(List<int> nums, int target) {
+  //   for (int i = 0; i < nums.length; i++) {
+  //     if (nums[i] == target) return i;
+  //   }
+  //   return -1;
     int left = 0;
     int right = nums.length - 1;
     while (left <= right) {
@@ -37,12 +41,16 @@ class Solution {
       if (nums[mid] < nums[right] &&
           (target > nums[mid] && target <= nums[right])) {
         left = mid + 1;
-      } else if (nums[mid] > nums[right] && (target <= nums[right])) {
-        left = mid + 1;
-      } else if (target > nums[left]) {
+      } else if (nums[left] <= nums[mid] && target < nums[left]) {
         left = mid + 1;
       } else {
-        right = mid - 1;
+        if (nums[left] < nums[mid] && target > nums[mid]) {
+          left = mid + 1;
+        } else if (target > nums[mid] && target > nums[right]) {
+          right = mid - 1;
+        } else {
+          right = mid - 1;
+        }
       }
     }
     return -1;
