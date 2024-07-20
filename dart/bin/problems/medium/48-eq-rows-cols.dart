@@ -23,24 +23,24 @@
 
 class Solution {
   int equalPairs(List<List<int>> grid) {
-    final rows = <List, int>{};
-    final columns = <List, int>{};
+    final rows = <String, int>{};
+    final columns = <String, int>{};
     int output = 0;
     for (int i = 0; i < grid.length; i++) {
-      rows[grid[i]] = rows.containsKey(grid[i]) ? rows[grid[i]]! + 1 : 1;
+      String joinedNumbers = grid[i].join(',');
+      rows[joinedNumbers] = rows.containsKey(joinedNumbers) ? rows[joinedNumbers]! + 1 : 1;
       final column = [];
       for (int j = 0; j < grid.length; j++) {
         column.add(grid[j][i]);
       }
-      columns[column] = columns.containsKey(column) ? columns[column]! + 1 : 1;
+      String joinedNumbersColumn = column.join(',');
+      columns[joinedNumbersColumn] = columns.containsKey(joinedNumbersColumn) ? columns[joinedNumbersColumn]! + 1 : 1;
     }
     for (var key in rows.keys) {
       if (columns.containsKey(key)) {
         output += rows[key]! * columns[key]!;
       }
     }
-    print(columns);
-    print(rows);
     return output;
   }
 }
