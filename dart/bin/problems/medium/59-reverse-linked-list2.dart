@@ -8,8 +8,18 @@ class ListNode {
 
   ListNode(this.val, [this.next]);
 }
+// Algos
+// 1) Use for loop to find left and right nodes
+// 2) Reverse list in range [left:right] by comparing (while left !== right.next) or rightBoundaryNode;
+// We use rightBoundaryNode because in loop we directly change head node so we have to save node reference before loop
+// 3) Now if left === 1, it means we reverse list from the first node, so we can just do head === prev, if left > 1
+// we saved before beforeLeftNode, which we can use now, beforeLeftNode.next = prev(reversed list) => now we have
+// all correct left nodes and reversed list, now we have to connect right nodes
+// 4) Use pointer to find rightNode in head and then do this => pointer.next = rightBoundaryNode, which we saved before
 
-// TODO
+// Key points: Reverse list in range [left:right] and save nodes before left and after right, after all operations
+// link before left nodes to reversed list and link nodes after right node
+
 class Solution {
   ListNode? reverseBetween(ListNode? head, int left, int right) {
     if (left == right) {
@@ -17,20 +27,20 @@ class Solution {
     }
     ListNode? leftBoundary = head;
     ListNode? leftPrev;
-    for (int i = 0; i < left - 1; i++) {
-      if (i == (left - 1) - 1) {
+    for (int i = 1; i < left; i++) {
+      if (i == (left - 1)) {
         leftPrev = leftBoundary;
       }
       leftBoundary = leftBoundary?.next;
     }
     ListNode? rightBoundary = head;
-    for (int i = 0; i < right; i++) {
+    for (int i = 1; i < right; i++) {
       rightBoundary = rightBoundary?.next;
     }
-
+    ListNode? rightBoundaryNode = rightBoundary?.next;
     ListNode? curr = leftBoundary;
     ListNode? prev;
-    while (curr != rightBoundary) {
+    while (curr != rightBoundaryNode) {
       ListNode? nextNode = curr?.next;
       curr?.next = prev;
 
@@ -39,17 +49,14 @@ class Solution {
     }
     if (left == 1) {
       head = prev;
+    } else {
+      leftPrev?.next = prev;
     }
     ListNode? finalCurr = head;
-    leftPrev ??= leftBoundary;
-    while (finalCurr != leftPrev) {
-      finalCurr = finalCurr?.next;
-    }
-    finalCurr?.next = prev;
     for (int i = 1; i < right; i++) {
       finalCurr = finalCurr?.next;
     }
-    finalCurr?.next = rightBoundary;
+    finalCurr?.next = rightBoundaryNode;
     return head;
   }
 }
@@ -57,12 +64,12 @@ class Solution {
 void main() {
   ListNode one = ListNode(1);
   ListNode two = ListNode(2);
-  // ListNode three = ListNode(3);
-  // ListNode four = ListNode(4);
-  // ListNode five = ListNode(5);
+  ListNode three = ListNode(3);
+  ListNode four = ListNode(4);
+  ListNode five = ListNode(5);
   one.next = two;
-  // two.next = three;
-  // three.next = four;
-  // four.next = five;
-  print(Solution().reverseBetween(one, 1, 2));
+  two.next = three;
+  three.next = four;
+  four.next = five;
+  print(Solution().reverseBetween(one, 2, 4));
 }

@@ -7,8 +7,6 @@
 // Input: head = [1,2,3,4]
 // Output: [2,1,4,3]
 
-// TODO
-
 class Node {
     constructor(val) {
         this.val = val;

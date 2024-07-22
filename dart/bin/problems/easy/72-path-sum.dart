@@ -9,6 +9,7 @@
 // Input: root = [3,9,20,null,null,15,7]
 // Output: 3
 
+import 'dart:math';
 
 class TreeNode {
   int val;
@@ -18,18 +19,30 @@ class TreeNode {
   TreeNode([this.val = 0, this.left, this.right]);
 }
 
+// somehow it solved
+// TODO
+
 class Solution {
-  bool hasPathSum(TreeNode? root, targetSum, [int currSum = 0]) {
+  bool hasPathSum(TreeNode? root, targetSum, [int currSum = -1, int depth = 0, TreeNode? parent]) {
     if (root == null) {
       return false;
     } else {
-      currSum += root.val;
+      if (depth == 1) {
+        currSum = 0;
+        currSum += root.val;
+        currSum += (parent?.val as int);
+      } else if (depth != 0)  {
+        currSum += root.val;
+      } else if (root.left == null && root.right == null) {
+        currSum = max(currSum, 0);
+        currSum += root.val;
+      }
     }
-    if (currSum == targetSum) {
+    if (currSum == targetSum && root.left == null && root.right == null) {
       return true;
     }
-    bool leftHalf = hasPathSum(root.left, targetSum, currSum);
-    bool rightHalf = hasPathSum(root.right, targetSum, currSum);
+    bool leftHalf = hasPathSum(root.left, targetSum, currSum, depth + 1, root);
+    bool rightHalf = hasPathSum(root.right, targetSum, currSum, depth + 1, root);
     if (leftHalf == true || rightHalf == true) {
       return true;
     } else {
@@ -39,30 +52,14 @@ class Solution {
 }
 
 void main() {
-  TreeNode three = TreeNode(3);
-  TreeNode nine = TreeNode(9);
-  TreeNode twenty = TreeNode(20);
-  TreeNode seven = TreeNode(7);
-  TreeNode fifteen = TreeNode(15);
+  TreeNode three = TreeNode(1);
+  TreeNode nine = TreeNode(2);
+  // TreeNode twenty = TreeNode(20);
+  // TreeNode seven = TreeNode(7);
+  // TreeNode fifteen = TreeNode(15);
   three.left = nine;
-  three.right = twenty;
-  twenty.left = fifteen;
-  twenty.right = seven;
-  print(Solution().hasPathSum(three, 38));
-
-  // int someValue(int a, int b) {
-  //   if (b == 100) {
-  //     b += 100;
-  //     print(b);
-  //     return b;
-  //   }
-  //   if (a == 50) {
-  //     return 20;
-  //   }
-  //   return someValue(30, 100);
-  //   int bValue = someValue(50, 60);
-  //   print (b);
-  //   return b;
-  // }
-  // someValue(10, 10);
+  // three.right = twenty;
+  // twenty.left = fifteen;
+  // twenty.right = seven;
+  print(Solution().hasPathSum(three, 1));
 }
