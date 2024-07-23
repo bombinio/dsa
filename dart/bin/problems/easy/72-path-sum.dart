@@ -19,8 +19,18 @@ class TreeNode {
   TreeNode([this.val = 0, this.left, this.right]);
 }
 
-// somehow it solved
-// TODO
+// Algos
+// 1) Create extra variables: currSum, depth of node, parent node
+// 2) If depth == 1 -> this node is child of main root node => then we increase
+// currSum by current node value and main root value, also if depth is not 1, but
+// bigger then 0(2,3,4...) we increase just by current value, and if none of them
+// for example just tree with 1 node we increase it by current value node
+// 3) Check if current sum is equal target and also current node is leaf node
+// 4) Use recursion to check left branch and right
+
+
+// Key points: Extra variables: currSum to track sum of nodes, depth and parent to
+// add value of root node
 
 class Solution {
   bool hasPathSum(TreeNode? root, targetSum, [int currSum = -1, int depth = 0, TreeNode? parent]) {
