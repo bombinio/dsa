@@ -25,10 +25,13 @@ class TreeNode {
 // main root 2 times
 
 class Solution {
-  int goodNodes(TreeNode? root, [int currMax = -1000000000, int counter = 0, depth = 0]) {
+  int goodNodes(TreeNode? root, [int? currMax, int counter = 0, depth = 0]) {
     if (root == null) {
       return counter;
     }
+
+    currMax ??= root.val;
+
     if (root.val >= currMax) {
       currMax = root.val;
       counter++;
