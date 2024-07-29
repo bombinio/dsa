@@ -24,6 +24,9 @@ class TreeNode {
 // Now we return result of (left sub tree + right) but also -1, because we count
 // main root 2 times
 
+// Key points: Use counter + (rightGoodNodes - counter) + (leftGoodNodes - counter)
+// to calculate all good nodes and depth to then sum them in final root
+
 class Solution {
   int goodNodes(TreeNode? root, [int? currMax, int counter = 0, depth = 0]) {
     if (root == null) {
