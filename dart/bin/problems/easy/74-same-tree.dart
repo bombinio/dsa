@@ -6,7 +6,10 @@ class TreeNode {
   TreeNode([this.val = 0, this.left, this.right]);
 }
 
-// TODO make helper
+// Algos
+// 1) Compare p.val and q.val, if they are not the same return false
+
+// Key point: compare each nodes
 
 class Solution {
 
@@ -16,7 +19,7 @@ class Solution {
     } else if ( (p == null && q != null) || (p != null && q == null) ) {
       return false;
     }
-    if (p?.left?.val != q?.left?.val || p?.right?.val != q?.right?.val || p?.val != q?.val) {
+    if (p?.val != q?.val) {
       return false;
     }
     bool leftSubTrees = isSameTree(p?.left, q?.left);

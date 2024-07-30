@@ -19,7 +19,17 @@ TreeNode? buildTree(List<int?> treeValues, [int index = 0]) {
   return node;
 }
 
-// TODO write algos
+// Algos
+// 1) Compare root value with target values, if they are same return root node
+// 2) If leftTree or rightTree returned not null, but node, we return this node
+// and move forward this root along the chain
+// 3) If leftTree and rightTree are not null, that means in this root
+// his left branch has target value and right branch has second target value
+// so we return current root
+
+// Key points: Check if left branch and right branch are not null of current root
+// check separately left branch and right branch and move forward along the chain
+// in stack this node
 
 class Solution {
   TreeNode? lowestCommonAncestor(TreeNode? root, TreeNode? p, TreeNode? q) {
