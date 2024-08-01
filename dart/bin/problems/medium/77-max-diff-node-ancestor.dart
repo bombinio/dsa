@@ -15,6 +15,7 @@
 // |10 - 13| = 3
 // Among all possible differences, the maximum value of 7 is obtained by |8 - 1| = 7.
 
+import 'dart:collection';
 import 'dart:math';
 
 class TreeNode {
@@ -26,22 +27,46 @@ class TreeNode {
 }
 
 // TODO remake
-TreeNode? buildTree(List<int?> treeValues, [int index = 0]) {
-  TreeNode? node;
-  if (index < treeValues.length) {
-    node = TreeNode(treeValues[index]);
-    node.left = buildTree(treeValues, 2 * index + 1);
-    node.right = buildTree(treeValues, 2 * index + 2);
-  }
+TreeNode? buildTree(List<int?> treeValues) {
+  int? value = treeValues.removeAt(0);
+  TreeNode root = TreeNode(value);
 
-  return node;
+  List<TreeNode> nodes = [];
+  nodes.add(root);
+
+  while (treeValues.isNotEmpty) {
+    TreeNode curr = nodes.removeAt(0);
+
+    int? value = treeValues.removeAt(0);
+    if (value != null) {
+      curr.left = TreeNode(value);
+      nodes.add(curr.left!);
+    }
+
+    if (treeValues.isNotEmpty) {
+      int? value = treeValues.removeAt(0);
+      if (value != null) {
+        curr.right = TreeNode(value);
+        nodes.add(curr.right!);
+      }
+    }
+  }
+  return root;
 }
 
-// TODO
+// Algos
+// 1) Make helper function with returns array of: current node value, minValue
+// maxValue and difference, when leaf node was met
+// 2) In ordinary nodes just compare results from leaf nodes and override
+// values and pass this values in the tree
+// 3) In main function return only difference value from result array
+
+// Key point: write helper which returns minValue, maxValue, difference at each
+// level in the tree
 
 class Solution {
   int? maxAncestorDiff(TreeNode? root) {
-    List<int>? findMinValue(TreeNode? node) {
+    List<int>? findMaxDifference(TreeNode? node) {
       if (node == null) {
         return null;
       }
@@ -49,40 +74,60 @@ class Solution {
       if (node.left == null && node.right == null) {
         int difference = 0;
         int maxValue = node.val!;
-        return [node.val!, maxValue, difference];
+        int minValue = node.val!;
+        return [node.val!, minValue, maxValue, difference];
       }
 
-      List<int>? leftSubTree = findMinValue(node.left);
-      List<int>? rightSubTree = findMinValue(node.right);
+      List<int>? leftSubTree = findMaxDifference(node.left);
+      List<int>? rightSubTree = findMaxDifference(node.right);
 
       int? maxDifference;
       int? newMaxValue;
+      int? newMinValue;
       if (leftSubTree != null) {
-        int prevDifference = ((node.val! - leftSubTree[1]).abs());
-        newMaxValue = max(leftSubTree[1], node.val!);
-        maxDifference = max(prevDifference, leftSubTree[2]);
+        int prevDifferenceMin = ((node.val! - leftSubTree[1]).abs());
+        int prevDifferenceMax = ((node.val! - leftSubTree[2]).abs());
+        int prevDifference = max(prevDifferenceMin, prevDifferenceMax);
+        newMinValue = min(leftSubTree[1], node.val!);
+        newMaxValue = max(leftSubTree[2], node.val!);
+        maxDifference = max(prevDifference, leftSubTree[3]);
       }
       if (rightSubTree != null) {
-        int prevDifference = ((node.val! - rightSubTree[1]).abs());
-        newMaxValue = max(rightSubTree[1], node.val!);
+        int prevDifferenceMin = ((node.val! - rightSubTree[1]).abs());
+        int prevDifferenceMax = ((node.val! - rightSubTree[2]).abs());
+        int prevDifference = max(prevDifferenceMin, prevDifferenceMax);
         if (leftSubTree != null) {
-          prevDifference = max(maxDifference!, prevDifference);
+          newMinValue = [newMinValue!, rightSubTree[1], node.val!].reduce(min);
+          newMaxValue = [newMaxValue!, rightSubTree[2], node.val!].reduce(max);
+          maxDifference = [prevDifference, maxDifference!, rightSubTree[3]].reduce(max);
+        } else {
+          newMinValue = min(rightSubTree[1], node.val!);
+          newMaxValue = max(rightSubTree[2], node.val!);
+          maxDifference = max(prevDifference, rightSubTree[3]);
         }
-        maxDifference = max(prevDifference, rightSubTree[2]);
       }
       if (maxDifference != null) {
-        return [node.val!, newMaxValue!, maxDifference];
+        print(node.val!);
+        print('min is: $newMinValue');
+        print('max is: $newMaxValue');
+        print('diff is: $maxDifference');
+        return [node.val!, newMinValue!, newMaxValue!, maxDifference];
       } else {
-        return [node.val!, node.val!, 0];
+        return [node.val!, node.val!, node.val!, 0];
       }
     }
-    List<dynamic>? valuesList = findMinValue(root);
-    return valuesList![2];
+
+    List<dynamic>? valuesList = findMaxDifference(root);
+    return valuesList![3];
   }
 }
 
 void main() {
-  TreeNode? node = buildTree([1,null,2,null,0,3]);
+  // TreeNode? node = buildTree([1, null, 2, null, 0, 3]);
+  TreeNode? node2 = buildTree([8, 3, 10, 1, 6, null, 14, null, null, 4, 7, 13]);
+  TreeNode? node3 = buildTree([2,5,0,null,null,4,null,null,6,1,null,3]);
 
   // print(Solution().maxAncestorDiff(node));
+  // print(Solution().maxAncestorDiff(node2));
+  print(Solution().maxAncestorDiff(node3));
 }
