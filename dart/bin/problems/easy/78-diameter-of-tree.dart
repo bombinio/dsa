@@ -14,7 +14,18 @@ import 'dart:math';
 
 import 'package:dart/build_tree.dart';
 
-// TODO calculate maxDepth for each subtree
+// Algos
+// 1) Create helper with additional parameter => depth
+// 2) Helper has to return list of diameter for current subTree and maxDepth
+// for current node, for example node has leftSubTree with leaf node on depth 4
+// and rightSubTree with leaf node on depth 3, it will return 4
+// 3) calculate diameter for each subTree => maxDepth for leftSubTree + maxDepth
+// for rightSubTree and minus (curr node depth * 2) because depth starts from 0
+// from main root, but some subTrees has bigger diameter then main root node
+// so we have to calculate diameter for every node in tree with depth 2, 3, 4...
+
+// Key point: make helper with returns list of diameter and maxDepth
+// diameter = (maxDepth of node.left + maxDepth of node.right) - (node.depth * 2)
 
 class Solution {
   int? diameterOfBinaryTree(TreeNode? root) {
@@ -23,30 +34,29 @@ class Solution {
         return null;
       }
       if (node.left == null && node.right == null) {
+        int diameter = depth;
         int maxDepth = depth;
-        return [depth, maxDepth];
+        return [diameter, maxDepth];
       }
       List<int>? leftMax = helper(node.left, depth + 1);
       List<int>? rightMax = helper(node.right, depth + 1);
 
-      int newFinalMaxDepth = ( (leftMax?[0] ?? 0) + (rightMax?[0] ?? 0) );
+      int diameter = ( (leftMax?[1] ?? 0) + (rightMax?[1] ?? 0) )  - (depth * 2);
+      int maxDepth = depth;
       if (leftMax != null) {
-        newFinalMaxDepth = max(leftMax[1], newFinalMaxDepth);
+        maxDepth = max(maxDepth, leftMax[1]);
+        diameter = max(diameter, leftMax[0]);
       }
       if (rightMax != null) {
-        newFinalMaxDepth = max(rightMax[1], newFinalMaxDepth);
+        maxDepth = max(maxDepth, rightMax[1]);
+        diameter = max(diameter, rightMax[0]);
       }
-      if (node.val == -9) {
-        print(newFinalMaxDepth);
-        print(leftMax![0]);
-        print(rightMax![0]);
-        print(depth);
-      }
-      return [depth, newFinalMaxDepth];
+
+      return [diameter, maxDepth];
     }
 
     List<int>? result = helper(root);
-    return result![1];
+    return result![0];
   }
 }
 

@@ -26,7 +26,6 @@ class TreeNode {
   TreeNode(this.val);
 }
 
-// TODO remake
 TreeNode? buildTree(List<int?> treeValues) {
   int? value = treeValues.removeAt(0);
   TreeNode root = TreeNode(value);
