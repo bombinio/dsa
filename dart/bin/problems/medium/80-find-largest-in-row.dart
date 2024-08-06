@@ -10,6 +10,12 @@ import 'dart:math';
 
 import 'package:dart/build_tree.dart';
 
+// Algos
+// 1) Use BFS to iterate through each level and add new variable maxInRow
+// which saves values of max value at each level
+
+// Key point: Use bfs, add variable maxInRow which saves max value at each level
+
 class Solution {
   List<int> largestValues(TreeNode? root) {
     if (root == null) {

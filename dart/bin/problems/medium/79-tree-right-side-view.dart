@@ -9,6 +9,12 @@ import 'dart:collection';
 
 import 'package:dart/build_tree.dart';
 
+// Algos
+// 1) Use BFS to iterate through each level and add in output only last
+// node of level, node with index qLen - 1
+
+// Key point: Use bfs, add only last node at each level
+
 class Solution {
   List<int> rightSideView(TreeNode? root) {
     final Queue<TreeNode?> q = Queue();
