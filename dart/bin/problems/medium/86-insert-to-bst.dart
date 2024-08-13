@@ -44,7 +44,7 @@ class Solution {
 }
 
 void main() {
-  TreeNode? root = buildTree([40,20,60,10,30,50,70]);
+  TreeNode? root = buildTree([40,20,60,10, 30,50,70]);
 
   TreeNode? result = Solution().insertIntoBST(root, 25);
 

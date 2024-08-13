@@ -1,9 +1,9 @@
 class TreeNode {
-  int? val;
+  int val;
   TreeNode? left;
   TreeNode? right;
 
-  TreeNode(this.val);
+  TreeNode(int? val) : val  = val ?? 0;
 }
 
 TreeNode? buildTree(List<int?> treeValues) {
