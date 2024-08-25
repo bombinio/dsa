@@ -12,6 +12,13 @@
 // ]
 // Output: 1
 
+// Algos
+// 1) If '1' found in grid - use dfs and traverse grid in 4 four directions and mark
+// these cells as visited and increment number of islands in the end
+
+// Key point: If '1' found use dfs to traverse in 4 four different directions
+
+
 class Solution {
   int numIslands(List<List<String>> grid) {
     int islands = 0;
