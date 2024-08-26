@@ -21,21 +21,25 @@
 class Solution {
   int findCircleNum(List<List<int>> isConnected) {
     int provinces = 0;
+
     Set<int> visited = {};
-    void dfs(List<int> connections, int index) {
-      visited.add(index);
-      for (int i = 0; i < connections.length; i++) {
-        if (i != index && connections[i] == 1 && !visited.contains(i)) {
-          dfs(isConnected[i], i);
+
+    void dfs(int city) {
+      visited.add(city);
+      for (int i = 0; i < isConnected[city].length; i++) {
+        if (i != city && isConnected[city][i] == 1 && !visited.contains(i)) {
+          dfs(i);
         }
       }
     }
+
     for (int i = 0; i < isConnected.length; i++) {
-      if (!(visited.contains(i))) {
-        dfs(isConnected[i], i);
+      if (!visited.contains(i)) {
+        dfs(i);
         provinces++;
       }
     }
+
     return provinces;
   }
 }
